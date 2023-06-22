@@ -29,7 +29,7 @@ app.use((err, req, res, next) => {
   })
 
 //Sets the port and starts the server
-const PORT = 3000
+const PORT = 3000;
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
