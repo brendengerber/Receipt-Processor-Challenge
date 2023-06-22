@@ -19,6 +19,15 @@ app.use(express.json());
 const apiRouter = require('./routers/api-router.js');
 app.use('/api', apiRouter);
 
+//Handles errors
+app.use((err, req, res, next) => {
+    if(!err.status){
+      err.status = 500;
+    }
+    console.log(err);
+    res.status(err.status).send(err.message);
+  })
+
 //Sets the port and starts the server
 const PORT = 3000
 
