@@ -9,10 +9,8 @@ const receiptsRouter = express.Router();
 
 //Assigns the new receipt a v4 UUID and POSTs it
 receiptsRouter.post('/process', validateReceipt, assignReceiptId, addReceipt, (req, res, next) => {
-    res.status(201).JSON({"id": req.receipt.id});
+    res.status(201).send({"id": req.receipt.id});
 });
-
-
 
 //Exports the router
 module.exports = receiptsRouter;
