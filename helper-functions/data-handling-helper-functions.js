@@ -25,7 +25,12 @@ const addEntry = function(data, entry){
 };
 
 const findEntry = function(data, id){
-    return data[id];
+    let entry = data[id];
+    if(entry){
+        return entry;
+    }else{
+        return false;
+    }
 };
 
 const calculatePoints = function(data){
