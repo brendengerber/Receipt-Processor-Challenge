@@ -1,7 +1,7 @@
 //Imports necessary modules
 const express = require('express');
-const validateReceipt = require('../middleware/validation-middleware.js');
-const {assignReceiptId, addReceipt} = require('../middleware/database-middleware.js');
+const {validateReceipt} = require('../middleware/validation-middleware.js');
+const {assignReceiptId, addReceipt} = require('../middleware/data-handling-middleware.js');
 
 
 //Creates the router
