@@ -4,7 +4,8 @@
   "description": "Fetch take home exercise",
   "main": "server.js",
   "scripts": {
-    "test": "mocha test/**/*-test.js"
+    "test": "mocha test/**/*-test.js",
+    "app": "node app.js"
   },
   "repository": {
     "type": "git",
