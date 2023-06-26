@@ -5,7 +5,7 @@ const express = require('express');
 const apiRouter = express.Router();
 
 //Mounts the receiptRouter
-const receiptsRouter = require('./routers/receipts-router.js');
+const receiptsRouter = require('./receipts-router.js');
 apiRouter.use('/receipts', receiptsRouter)
 
 //Handles errors
