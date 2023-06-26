@@ -1,4 +1,4 @@
 //Variable used to hold receipts in lieu of a database
-let receipts = [];
+let receipts = {};
 
 module.exports = receipts;
