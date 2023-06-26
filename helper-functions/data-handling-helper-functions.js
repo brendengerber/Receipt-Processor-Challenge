@@ -22,27 +22,19 @@ const addEntry = function(data, entry){
     entry.id = id;
     data[id] = entry;
     return data[id];
-}
+};
+
+const findEntry = function(data, id){
+    return data[id];
+};
 
 const calculatePoints = function(data){
 
-}
+};
 
 module.exports = {
     assignEntryId,
     addEntry,
-    calculatePoints
+    calculatePoints,
+    findEntry
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
