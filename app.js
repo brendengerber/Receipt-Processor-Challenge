@@ -17,7 +17,7 @@ app.use(express.json());
 
 //Mounts the api router
 const apiRouter = require('./routers/api-router.js');
-app.use('/api', apiRouter);
+app.use('/', apiRouter);
 
 //Sets the port and starts the server
 const PORT = 3000;
