@@ -12,7 +12,7 @@ receiptsRouter.post('/process', validateReceipt, assignReceiptId, assignReceiptP
 });
 
 receiptsRouter.get('/:id/points', validateIdParam, attatchReceiptById, (req, res, next) => {
-    res.status(200).send({"poings": req.receipt.points});
+    res.status(200).send({"points": req.receipt.points});
 })
 
 //Exports the router

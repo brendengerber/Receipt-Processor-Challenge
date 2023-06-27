@@ -14,7 +14,7 @@ const assignReceiptId = (req, res, next) => {
 
 const assignReceiptPoints = (req, res, next) => {
     try{
-        req.receipt.points = calculateReceiptPoints;
+        req.receipt.points = calculateReceiptPoints(req.receipt);
         next();
     }catch(err){
         next(err);

@@ -56,7 +56,7 @@ const validateIdParam = (req, res, next) => {
         //Uses a regular expression to test that the Id of the requested receipt is a v4 UUID
         if(/^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i.test(req.params.id)){
             req.id = req.params.id;
-            rext();
+            next();
         }else{
             const err = new Error('Request parameter is not a v4 UUID.');
             err.status = 400;
