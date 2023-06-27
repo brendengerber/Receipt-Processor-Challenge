@@ -13,8 +13,13 @@ const assignReceiptId = (req, res, next) => {
 };
 
 const addReceipt = (req, res, next) => {
-    addEntry(receipts, req.receipt);
-    next();
+    try{
+        addEntry(receipts, req.receipt);
+        next();
+    }catch(err){
+        next(err);
+    }
+
 };
 
 const attatchReceiptById = (req, res, next) => {
