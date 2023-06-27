@@ -18,10 +18,8 @@ const createEntryId = function(data){
 
 //Assigns a v4 UUID to a new entry, adds it to the data object, and returns the newly added entry
 const addEntry = function(data, entry){
-    const id = createEntryId(data);
-    entry.id = id;
-    data[id] = entry;
-    return data[id];
+    data[entry.id] = entry;
+    return data[entry.id];
 };
 
 const findEntry = function(data, id){
