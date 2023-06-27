@@ -1,8 +1,8 @@
 //Imports necessary modules
 const crypto = require('crypto')
 
-//Assigns a v4 UUID to an entry for any data object
-const assignEntryId = function(data){
+//Creats a v4 UUID to an entry for any data object
+const createEntryId = function(data){
     let id;
     let unique = false;
     //Continues generating v4 UUIDs until a unique one is generated
@@ -33,7 +33,7 @@ const findEntry = function(data, id){
     }
 };
 
-const calculatePoints = function(receipt){
+const calculateReceiptPoints = function(receipt){
     let points = 0;
     //Adds 1 point for every alphanumeric character in the retailer name
     points += receipt.retailer.replace(/[^0-9a-z]/gi, '').length;
@@ -66,9 +66,8 @@ const calculatePoints = function(receipt){
 };
 
 module.exports = {
-    assignEntryId,
+    createEntryId,
     addEntry,
-    calculatePoints,
     findEntry,
-    calculatePoints
+    calculateReceiptPoints
 };
