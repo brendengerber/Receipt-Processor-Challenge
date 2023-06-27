@@ -1,6 +1,5 @@
 //Imports necessary modules
 const Schema = require('validate');
-const moment = require('moment');
 const validator = require('validator');
 
 //Creates a schema to validate receipts
