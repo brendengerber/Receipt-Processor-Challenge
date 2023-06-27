@@ -1,5 +1,6 @@
 //Imports necessary modules
 const Schema = require('validate');
+const moment = require('moment')
 
 //Creates a schema to validate receipts
 const receiptSchema = new Schema({
@@ -9,8 +10,7 @@ const receiptSchema = new Schema({
     },
     purchaseDate: {
         type: String,
-        required: true
-    },
+        required: true    },
     purchaseTime: {
         type: String, 
         required: true
@@ -31,20 +31,35 @@ const receiptSchema = new Schema({
     }
 });
 
-
+//Validates the receipt object sent in the request body and attatches it to req.receipt to pass it to the next middleware
 const validateReceipt = (req, res, next) => {
     try{
-        //Validates the receipt object sent in the request body and attatches it to req.receipt to pass it to the next middleware
-        const validationErrors = receiptSchema.validate(req.body);
+        let validationErrors;
+        //Validates the format of the receipt object and sets validationErrors equal to the array of errors
+        validationErrors = receiptSchema.validate(req.body);
+
+        //Validates the date format and pushes any errors to the validationErrors array
+        if(!moment(req.body.purchaseDate, "YYYY-MM-DD", true).isValid()){
+            validationErrors.push('Error: purchase date does not follow the YYYY-MM-DD format.');
+        }
+
+        //Validates the time format and pushes any errors to the validationErrors array
+        if(!moment(req.body.purchaseTime, "HH:mm", true).isValid()){
+            validationErrors.push('Error: purchase time does not follow the HH-mm 24 hour format.');
+        }
+
+        //Checks if any errors have been recorded and calls next() if not        
         if(validationErrors.length === 0){
             req.receipt = req.body;
             next();
-        //Creates an error describing the invalid formatting and passes it to the error handling middleware
+
+        //In case of errors, creates a new error object describing the invalid formatting and passes it to the error handling middleware
         }else{
             const err = new Error(`The receipt format is invalid.\n ${validationErrors.join("\n")}`);
             err.status = 403;
             next(err);
         }
+
     //Catches any other unforseen server errors and passes them to the error handling middleware
     }catch(err){
        next(err);
