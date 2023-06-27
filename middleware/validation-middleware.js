@@ -50,26 +50,26 @@ const validateReceipt = (req, res, next) => {
 
         //Validates the date format and pushes any errors to the validationErrors array
         if(validateDate(req.body.purchaseDate) === false){
-            validationErrors.push('Error: purchase date does not follow the YYYY-MM-DD format.');
+            validationErrors.push('Error: purchase date does not follow the YYYY-MM-DD date format.');
         }
 
         //Validates the time format and pushes any errors to the validationErrors array
         if(validateTime(req.body.purchaseTime) === false){
-            validationErrors.push('Error: purchase time does not follow the HH:mm 24 hour format.');
+            validationErrors.push('Error: purchase time does not follow the HH:mm 24 hour time format.');
         }
 
         //Validates the price format of all items
         if(req.body.items){
             for(let item of req.body.items){
                 if(validatePrice(item.price) === false){
-                    validationErrors.push(`Error: ${item.shortDescription} price does not follow the xxxx.xx currency format.`);
+                    validationErrors.push(`Error: ${item.shortDescription}'s price does not follow the xxxx.xx currency format.`);
                 }
             }
         }
 
         //Validates the price format for total
         if(validatePrice(req.body.total) === false){
-            validationErrors.push(`Error: total price does not follow the xxxx.xx currency format.`);
+            validationErrors.push(`Error: total does not follow the xxxx.xx currency format.`);
         }
 
         //Checks if any errors have been recorded and if not attatches the receipt to pass to the next middleware        
