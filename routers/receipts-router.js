@@ -1,8 +1,7 @@
 //Imports necessary modules
 const express = require('express');
-const {validateReceipt} = require('../middleware/validation-middleware.js');
-const {assignReceiptId, addReceipt} = require('../middleware/data-handling-middleware.js');
-
+const {validateReceipt, validateIdParam} = require('../middleware/validation-middleware.js');
+const {assignReceiptId, addReceipt, attatchReceiptById} = require('../middleware/data-handling-middleware.js');
 
 //Creates the router
 const receiptsRouter = express.Router();
@@ -11,6 +10,10 @@ const receiptsRouter = express.Router();
 receiptsRouter.post('/process', validateReceipt, assignReceiptId, addReceipt, (req, res, next) => {
     res.status(201).send({"id": req.receipt.id});
 });
+
+receiptsRouter.get('/:id/points', validateIdParam, attatchReceiptById, (req, res, next) => {
+    res.status(200).send({"poings": req.receipt.points});
+})
 
 //Exports the router
 module.exports = receiptsRouter;
