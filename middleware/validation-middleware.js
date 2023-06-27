@@ -55,7 +55,7 @@ const validateReceipt = (req, res, next) => {
 
         //Validates the time format and pushes any errors to the validationErrors array
         if(validateTime(req.body.purchaseTime) === false){
-            validationErrors.push('Error: purchase time does not follow the HH-mm 24 hour format.');
+            validationErrors.push('Error: purchase time does not follow the HH:mm 24 hour format.');
         }
 
         //Validates the price format of all items
