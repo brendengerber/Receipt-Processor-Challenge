@@ -7,25 +7,34 @@ const {validateDate, validateTime, validatePrice} = require('../helper-functions
 const receiptSchema = new Schema({
     retailer: {
         type: String,
-        required: true
+        required: true,
     },
     purchaseDate: {
         type: String,
-        required: true    },
+        required: true    
+    },
     purchaseTime: {
         type: String, 
         required: true
     },
-    items: [{
-        shortDescription: {
-            type: String,
-            required: true
-        },
-        price: {
-            type: String,
-            required: true
+    items: {
+        type: Array,
+        required: true,
+        each: {
+            type: Object,
+            required: true,
+            properties: {
+                shortDescription: {
+                    type: String,
+                    required: true
+                },
+                price: {
+                    type: String,
+                    required: true
+                }
+            }   
         }
-    }],
+    },
     total: {
         type: String,
         required: true
@@ -50,14 +59,17 @@ const validateReceipt = (req, res, next) => {
         }
 
         //Validates the price format of all items
-        for(let item of req.body.items){
-            if(validatePrice(item.price) === false){
-                validationErrors.push(`Error: ${item.shortDescription} price does not follow the xxxx.xx currency format.`)
+        if(req.body.items){
+            for(let item of req.body.items){
+                if(validatePrice(item.price) === false){
+                    validationErrors.push(`Error: ${item.shortDescription} price does not follow the xxxx.xx currency format.`);
+                }
             }
         }
+
         //Validates the price format for total
         if(validatePrice(req.body.total) === false){
-            validationErrors.push(`Error: total price does not follow the xxxx.xx currency format.`)
+            validationErrors.push(`Error: total price does not follow the xxxx.xx currency format.`);
         }
 
         //Checks if any errors have been recorded and if not attatches the receipt to pass to the next middleware        
