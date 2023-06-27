@@ -1,6 +1,7 @@
 //Imports necessary modules
 const Schema = require('validate');
 const validator = require('validator');
+const {validateDate, validateTime, validatePrice} = require('../helper-functions/validation-helper-functions.js')
 
 //Creates a schema to validate receipts
 const receiptSchema = new Schema({
@@ -39,20 +40,24 @@ const validateReceipt = (req, res, next) => {
         validationErrors = receiptSchema.validate(req.body);
 
         //Validates the date format and pushes any errors to the validationErrors array
-        if(!validator.isDate(req.body.purchaseDate, {format: 'YYYY-MM-DD', delimiters: ['-']})){
+        if(validateDate(req.body.purchaseDate) === false){
             validationErrors.push('Error: purchase date does not follow the YYYY-MM-DD format.');
         }
 
         //Validates the time format and pushes any errors to the validationErrors array
-        if(!validator.isTime(req.body.purchaseTime, {hourFromat: 'hour24'})){
+        if(validateTime(req.body.purchaseTime) === false){
             validationErrors.push('Error: purchase time does not follow the HH-mm 24 hour format.');
         }
 
         //Validates the price format of all items
         for(let item of req.body.items){
-            if(!validator.isCurrency(item.price, {thousands_separator: '', require_decimal: true, digits_after_decimal: [2]}) && isNaN(item)){
+            if(validatePrice(item.price) === false){
                 validationErrors.push(`Error: ${item.shortDescription} price does not follow the xxxx.xx currency format.`)
             }
+        }
+        //Validates the price format for total
+        if(validatePrice(req.body.total) === false){
+            validationErrors.push(`Error: total price does not follow the xxxx.xx currency format.`)
         }
 
         //Checks if any errors have been recorded and if not attatches the receipt to pass to the next middleware        
