@@ -1,5 +1,5 @@
 //Variable used to hold receipts in lieu of a database
-let receipts = {1:2};
+let receipts = {};
 
 //This object's methods are used to access and manipulate the object where all receipts are stored so that any other module can have access to the same set
 const data = {
