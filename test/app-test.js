@@ -9,8 +9,6 @@ const {data} = require('../data/data.js')
 chai.use(chaiHttp);
 chai.use(require('chai-json'));
 
-//if the receipt object is formatted properly
-
 //Testing suite
 describe('app', () => {
     describe('/receipts', () => {
@@ -22,7 +20,7 @@ describe('app', () => {
         });
                                 
         describe('/process POST', () => {   
-            it('it should generate a v4 UUID, send it as a JSON object, and add it to the receipt object', (done) => {
+            it('it should generate a v4 UUID, send it as a JSON object, and add it to the receipt if the receipt object is formatted properly', (done) => {
                 chai.request(app).post('/receipts/process').send(mockData.validMockReceiptOne).end((err, res) => {
                     expect(res.body).to.be.a.jsonObj();
                     expect(res).to.have.property('error').and.eql(false);
@@ -31,13 +29,13 @@ describe('app', () => {
                     done();
                 });
             });
-            it('it should calculate the correct points value of the receipt and add it to the receipt object', (done) => {
+            it('it should calculate the correct points value of the receipt and add it to the receipt object if the receipt object is formatted properly', (done) => {
                 chai.request(app).post('/receipts/process').send(mockData.validMockReceiptOne).end((err, res) => {
                     expect(data.getReceipts()[res.body.id]).to.have.property('points').and.eql(28);
                     done();
                 });
             });
-            it('it should save the receipt and send status code 201 ', (done) => {
+            it('it should save the receipt and send status code 201 if the receipt object is formatted properly', (done) => {
                 chai.request(app).post('/receipts/process').send(mockData.validMockReceiptOne).end((err, res) => {
                     expect(res).to.have.status(201);
                     expect(err).to.be.null;
