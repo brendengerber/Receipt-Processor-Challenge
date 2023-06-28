@@ -5,8 +5,8 @@ const helmet = require('helmet');
 
 const app = express();
 
-//Remove after development to minimize unnecessary realtime logs on server
-app.use(morgan('tiny'));
+//Comment out for production to minimize unnecessary realtime logs on server
+//app.use(morgan('tiny'));
 
 //Security measures
 app.use(helmet());
@@ -20,9 +20,11 @@ const apiRouter = require('./routers/api-router.js');
 app.use('/', apiRouter);
 
 //Sets the port and starts the server
-const PORT = 3000;
+const PORT = 3002;
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });
-  
+
+//For testing purposes
+module.exports = app;

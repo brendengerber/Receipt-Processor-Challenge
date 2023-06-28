@@ -1,29 +1,31 @@
 //Imports necessary modules
-const crypto = require('crypto')
+const crypto = require('crypto');
+const {data} = require('../data/data.js');
 
-//Creats a v4 UUID to an entry for any data object
-const createEntryId = function(data){
-    let id;
+
+//Creats a v4 UUID to an entry for any data object, dataSet is a string to identify which dataSet to access
+const createEntryId = function(dataSet){
+    let newId;
     let unique = false;
     //Continues generating v4 UUIDs until a unique one is generated
     while(!unique){
-        id = crypto.randomUUID();
-        unique = !data.hasOwnProperty(id);
+        newId = crypto.randomUUID();
+        unique = !data["get"+dataSet]().hasOwnProperty(newId);
     }
     //Reserves the v4 UUID so it cannot be taken by another request coming in before processing has been completed
-    data.id = undefined;
+    data["save"+dataSet.slice(0, -1)]({id: newId});
     //Returns the v4 UUID for use in consequent functions and middleware
-    return id;
+    return newId;
 };
 
-//Assigns a v4 UUID to a new entry, adds it to the data object, and returns the newly added entry
-const addEntry = function(data, entry){
-    data[entry.id] = entry;
-    return data[entry.id];
+//Adds an entry to the data object, dataSet is a string to identify which dataSet to access
+const addEntry = function(dataSet, entry){
+    data["save"+dataSet.slice(0, -1)](entry);
+    return true;
 };
 
-const findEntry = function(data, id){
-    let entry = data[id];
+const findEntry = function(dataSet, id){
+    let entry = data["get"+dataSet]()[id]
     if(entry){
         return entry;
     }else{
@@ -69,3 +71,4 @@ module.exports = {
     findEntry,
     calculateReceiptPoints
 };
+
