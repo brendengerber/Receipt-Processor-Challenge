@@ -31,8 +31,16 @@ const validatePrice = function(priceString){
     return true;
 };
 
+const validateId = function(id){
+    if(/^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i.test(id)){
+        return true
+    }
+    return false
+}
+
 module.exports = {
     validateDate,
     validateTime,
-    validatePrice
+    validatePrice,
+    validateId
 };

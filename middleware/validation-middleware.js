@@ -1,7 +1,7 @@
 //Imports necessary modules
 const Schema = require('validate');
 const validator = require('validator');
-const {validateDate, validateTime, validatePrice} = require('../helper-functions/validation-helper-functions.js')
+const {validateDate, validateTime, validatePrice, validateId} = require('../helper-functions/validation-helper-functions.js')
 
 //Creates a schema to validate receipts
 const receiptSchema = new Schema({
@@ -93,11 +93,11 @@ const validateReceipt = (req, res, next) => {
 const validateIdParam = (req, res, next) => {
     try{
         //Uses a regular expression to test that the Id of the requested receipt is a v4 UUID
-        if(/^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i.test(req.params.id)){
+        if(validateId(req.params.id)){
             req.id = req.params.id;
             next();
         }else{
-            const err = new Error('Request parameter is not a v4 UUID.');
+            const err = new Error('The request ID is not a valid v4 UUID.');
             err.status = 400;
             next(err);
         }
