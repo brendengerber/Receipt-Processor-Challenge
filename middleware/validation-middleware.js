@@ -79,7 +79,7 @@ const validateReceipt = (req, res, next) => {
         //In case of errors, creates a new error object describing the invalid formatting and passes it to the error handling middleware
         }else{
             const err = new Error(`The receipt format is invalid.\n ${validationErrors.join("\n")}`);
-            err.status = 403;
+            err.status = 400;
             next(err);
         }
 
@@ -96,7 +96,7 @@ const validateIdParam = (req, res, next) => {
             req.id = req.params.id;
             next();
         }else{
-            const err = new Error('The request ID is not a valid v4 UUID.');
+            const err = new Error(`The request ID ${req.params.id} is not a valid v4 UUID.`);
             err.status = 400;
             next(err);
         }
