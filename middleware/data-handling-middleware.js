@@ -1,6 +1,4 @@
 //Imports receipts and database helper functions
-// let receipts = require('../data/receipts.js');
-
 const {createEntryId, addEntry, findEntry, calculateReceiptPoints} = require('../helper-functions/data-handling-helper-functions.js');
 
 //Assigns an id to the envelope in the req body based on the current highest id
@@ -47,7 +45,7 @@ const attatchReceiptById = (req, res, next) => {
     }catch(err){
         next(err);
     }
-}
+};
 
 module.exports = {
     assignReceiptId,
@@ -55,5 +53,3 @@ module.exports = {
     addReceipt,
     attatchReceiptById
 };
-
-
