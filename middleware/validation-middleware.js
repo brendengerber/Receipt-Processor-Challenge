@@ -1,6 +1,5 @@
 //Imports necessary modules
 const Schema = require('validate');
-const validator = require('validator');
 const {validateDate, validateTime, validatePrice, validateId} = require('../helper-functions/validation-helper-functions.js')
 
 //Creates a schema to validate receipts
