@@ -1,3 +1,6 @@
+//This file contains helper functions that manipulate the dataset in some way and can be used by middleware
+//If the data storrage method is changed, these functions can be refactored to return the same results without affecting the rest of the server and allowing it to continue functioning as normal
+
 //Imports necessary modules
 const crypto = require('crypto');
 const {data} = require('../data/data.js');
@@ -33,7 +36,7 @@ const addEntry = function(dataSet, entry){
     }
 };
 
-//Finds and returns an entry from a dataset, if the entry does not exist it will return false so the middleware can create and throw an error
+//Finds and returns an entry from a dataset, if the entry does not exist it will return false so the middleware can create and send a 404 error
 //"dataset" is a string to identify which data object to access
 //"id" is a string to identify the desired entry
 const findEntry = function(dataSet, id){

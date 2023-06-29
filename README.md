@@ -38,9 +38,9 @@ docker run -p 3000:3000 receipt-processor-gerber npm run test
 ### 2. Built to scale. 
 
 * Moduler design allows new functionality to be added without affecting existing files.
-* Route functionality is kept in seperate middleware functions allowing to maintain separation of concerns.
+* Route functionality is kept in seperate middleware functions to maintain separation of concerns and allow for re use in multiple routes.
 * Helper functions are kept generic to allow for re-use by multiple modules for multiple purposes.
-* Helper functions are used to obtain data, so if the data source is changed they can easily be refactored to return the same results allowing the rest of the server to continue functioning as normal.
+* Helper functions are used to obtain data, such that if the data storage method is changed, they can be refactored to return the same results, without affecting the rest of the server and allowing it to continue functioning as normal.
 
 ---
 ## **Summary of API Specification**

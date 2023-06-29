@@ -1,3 +1,6 @@
+//Validation middlewares will add request bodies and parameters as custom properties to the req object
+//This allows for consistency and for middlewares down the chain to use the data knowing it is clean and properly formatted
+
 //Imports necessary modules
 const Schema = require('validate');
 const {validateDate, validateTime, validatePrice, validateId} = require('../helper-functions/validation-helper-functions.js')
