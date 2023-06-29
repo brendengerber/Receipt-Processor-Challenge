@@ -6,11 +6,12 @@ const {assignReceiptId, assignReceiptPoints, addReceipt, attatchReceiptById} = r
 //Creates the router
 const receiptsRouter = express.Router();
 
-//Assigns the new receipt a v4 UUID, assigns its point value, and POSTs it
+//Assigns the new receipt a v4 UUID, assigns its point value, saves it, and sends a response with the newly assigned Id
 receiptsRouter.post('/process', validateReceipt, assignReceiptId, assignReceiptPoints, addReceipt, (req, res, next) => {
     res.status(201).send({"id": req.receipt.id});
 });
 
+//Looks up the receipt of the given Id parameter and sends a response with the calculated points value
 receiptsRouter.get('/:id/points', validateIdParam, attatchReceiptById, (req, res, next) => {
     res.status(200).send({"points": req.receipt.points});
 })

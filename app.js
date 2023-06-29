@@ -5,6 +5,7 @@ const helmet = require('helmet');
 
 const app = express();
 
+//Provides logs request data to the console for every request made to the server
 //Comment out for production to minimize unnecessary realtime logs on server
 //app.use(morgan('tiny'));
 
@@ -19,12 +20,13 @@ app.use(express.json());
 const apiRouter = require('./routers/api-router.js');
 app.use('/', apiRouter);
 
-//Sets the port and starts the server
+//Sets the port
 const PORT = 3000;
 
+//Starts the server
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });
 
-//For testing purposes
+//Exports the app for testing purposes
 module.exports = app;

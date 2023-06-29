@@ -1,12 +1,14 @@
 //Imports necessary modules
 const validator = require('validator');
 
-const validateDate = function(dateString){
+//Validates date properties of submitted entries to ensure they conforms to the YYYY-MM-DD date format
+//"date" is a string to validate
+const validateDate = function(date){
     try{
-        if(typeof dateString !== 'string'){
+        if(typeof date !== 'string'){
             return undefined;
         }
-        if(!validator.isDate(dateString, {format: 'YYYY-MM-DD', delimiters: ['-']})){
+        if(!validator.isDate(date, {format: 'YYYY-MM-DD', delimiters: ['-']})){
             return false;
         }
         return true;
@@ -15,12 +17,14 @@ const validateDate = function(dateString){
     }
 };
 
-const validateTime = function(timeString){
+//Validates time properties of submitted entries to ensure that they conforms to the HH:mm 24 hour standard
+//"time" is a string to validate
+const validateTime = function(time){
     try{
-        if(typeof timeString !== 'string'){
+        if(typeof time !== 'string'){
             return undefined;
         }
-        if(!validator.isTime(timeString, {hourFromat: 'hour24'})){
+        if(!validator.isTime(time, {hourFromat: 'hour24'})){
             return false;
         }
         return true;
@@ -29,12 +33,14 @@ const validateTime = function(timeString){
     }
 };
 
-const validatePrice = function(priceString){
+//Validates price properties of submitted entries to ensure that they conforms to the xxxx.xx currency format
+//"price" is a string to validate
+const validatePrice = function(price){
     try{
-        if(typeof priceString !== 'string'){
+        if(typeof price !== 'string'){
             return undefined;
         };
-        if(!validator.isCurrency(priceString, {thousands_separator: '', require_decimal: true, digits_after_decimal: [2]}) || isNaN(priceString)){
+        if(!validator.isCurrency(price, {thousands_separator: '', require_decimal: true, digits_after_decimal: [2]}) || isNaN(price)){
             return false;
         };
         return true;
@@ -43,6 +49,8 @@ const validatePrice = function(priceString){
     }
 };
 
+//Validates a submitted id using a regular expression to ensure it conforms to the v4 UUID standard
+//"id" is a string to validate
 const validateId = function(id){
     try{
         if(/^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i.test(id)){
@@ -54,6 +62,7 @@ const validateId = function(id){
     }
 };
 
+//Exports functions to be used in other modules
 module.exports = {
     validateDate,
     validateTime,

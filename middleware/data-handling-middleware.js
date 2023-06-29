@@ -1,7 +1,7 @@
-//Imports receipts and database helper functions
+//Imports necessary modules
 const {createEntryId, addEntry, findEntry, calculateReceiptPoints} = require('../helper-functions/data-handling-helper-functions.js');
 
-//Assigns an id to the envelope in the req body based on the current highest id
+//Assigns a unique v4 UUID to the receipt attached to the req
 const assignReceiptId = (req, res, next) => {
     try{
         req.receipt.id = createEntryId('Receipts');
@@ -11,6 +11,7 @@ const assignReceiptId = (req, res, next) => {
     }
 };
 
+//Calculates and assigns the points value of the receipt attached to the req object to pass it to the next middleware
 const assignReceiptPoints = (req, res, next) => {
     try{
         req.receipt.points = calculateReceiptPoints(req.receipt);
@@ -20,7 +21,7 @@ const assignReceiptPoints = (req, res, next) => {
     }
 };
 
-//Adds the receipt to the data object
+//Adds the receipt attatched to the req body to the data object for storrage
 const addReceipt = (req, res, next) => {
     try{
         addEntry('Receipts', req.receipt);
@@ -31,6 +32,8 @@ const addReceipt = (req, res, next) => {
 
 };
 
+//Locates and attatches the receipt of a given Id to the req object to be passed to the next middleware 
+//Sends a 404 response if the receipt of the given Id does not exist
 const attatchReceiptById = (req, res, next) => {
     try{
         const receipt = findEntry('Receipts', req.id);
@@ -47,6 +50,7 @@ const attatchReceiptById = (req, res, next) => {
     }
 };
 
+//Exports functions to be used in other modules
 module.exports = {
     assignReceiptId,
     assignReceiptPoints,

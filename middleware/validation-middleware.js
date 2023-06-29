@@ -2,7 +2,7 @@
 const Schema = require('validate');
 const {validateDate, validateTime, validatePrice, validateId} = require('../helper-functions/validation-helper-functions.js')
 
-//Creates a schema to validate receipts
+//Creates a schema to validate receipt objects
 const receiptSchema = new Schema({
     retailer: {
         type: String,
@@ -41,6 +41,7 @@ const receiptSchema = new Schema({
 });
 
 //Validates the receipt object sent in the request body and attatches it to req.receipt to pass it to the next middleware
+//Creates a formatted error message recording all invalidities, and sends a 400 response if there are any
 const validateReceipt = (req, res, next) => {
     try{
         let validationErrors;
@@ -89,9 +90,10 @@ const validateReceipt = (req, res, next) => {
     }
 };
 
+//Validates the Id paramater of a request to ensure it conforms to the v4 UUID standard 
+//Sends a 400 response if the Id is not valid
 const validateIdParam = (req, res, next) => {
     try{
-        //Uses a regular expression to test that the Id of the requested receipt is a v4 UUID
         if(validateId(req.params.id)){
             req.id = req.params.id;
             next();
@@ -105,6 +107,7 @@ const validateIdParam = (req, res, next) => {
     }
 };
 
+//Exports functions to be used in other modules
 module.exports = {
     validateReceipt,
     validateIdParam

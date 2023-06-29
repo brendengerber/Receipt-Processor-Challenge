@@ -1,13 +1,14 @@
 //Imports necessary modules
 const chai = require('chai');
 const chaiHttp = require('chai-http');
+const chaiJson = require('chai-json')
 const expect = chai.expect;
 const {mockData} = require('./mock-data.js')
 const app = require('../app.js');
 const {data} = require('../data/data.js')
 
 chai.use(chaiHttp);
-chai.use(require('chai-json'));
+chai.use(chaiJson);
 
 //Testing suite
 describe('app', () => {
