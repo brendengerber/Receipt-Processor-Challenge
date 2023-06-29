@@ -90,7 +90,7 @@ These rules collectively define how many points should be awarded to a receipt.
 
 
 ## Examples
-
+### Example 1
 ```json
 {
   "retailer": "Target",
@@ -131,8 +131,7 @@ Breakdown:
   = 28 points
 ```
 
-----
-
+### Example Two
 ```json
 {
   "retailer": "M&M Corner Market",

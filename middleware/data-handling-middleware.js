@@ -1,3 +1,5 @@
+//Route functionality is kept here in seperate middleware functions to maintain separation of concerns and allow for re use in multiple routes.
+
 //Imports necessary modules
 const {createEntryId, addEntry, findEntry, calculateReceiptPoints} = require('../helper-functions/data-handling-helper-functions.js');
 

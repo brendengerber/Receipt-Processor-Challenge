@@ -1,4 +1,5 @@
-//This file contains helper functions that manipulate the dataset in some way and can be used by middleware
+//This file contains helper functions that manipulate a dataset 
+//The helper functions are kept generic to allow for re-use by multiple modules for multiple purposes
 //If the data storrage method is changed, these functions can be refactored to return the same results without affecting the rest of the server and allowing it to continue functioning as normal
 
 //Imports necessary modules
