@@ -2,8 +2,8 @@
 const crypto = require('crypto');
 const {data} = require('../data/data.js');
 
-
-//Creats a v4 UUID to an entry for any data object, dataSet is a string to identify which dataSet to access
+//Creats a unique v4 UUID
+//"dataSet" is a string to identify which data object to access to verify uniqueness and reserve the id
 const createEntryId = function(dataSet){
     try{
         let newId;
@@ -22,7 +22,9 @@ const createEntryId = function(dataSet){
     }
 };
 
-//Adds an entry to the data object, dataSet is a string to identify which dataSet to access
+//Adds an entry to a dataset
+//"dataSet" is a string to identify which data object to access 
+//"entry" is an object such as a receipt
 const addEntry = function(dataSet, entry){
     try{
         data["save"+dataSet.slice(0, -1)](entry);
@@ -31,8 +33,11 @@ const addEntry = function(dataSet, entry){
     }
 };
 
+//Finds and returns an entry from a dataset, if the entry does not exist it will return false so the middleware can create and throw an error
+//"dataset" is a string to identify which data object to access
+//"id" is a string to identify the desired entry
 const findEntry = function(dataSet, id){
-    let entry = data["get"+dataSet]()[id];
+    let entry = data["get"+dataSet.slice(0, -1)](id);
     if(entry){
         return entry;
     }else{
@@ -40,6 +45,8 @@ const findEntry = function(dataSet, id){
     }
 };
 
+//Calculates the points of a receipt and returns the final amount
+//"receipt" is a valid receipt object
 const calculateReceiptPoints = function(receipt){
     try{
         let points = 0;
@@ -77,6 +84,7 @@ const calculateReceiptPoints = function(receipt){
 
 };
 
+//Exports functions to be used in other modules
 module.exports = {
     createEntryId,
     addEntry,
