@@ -87,8 +87,7 @@ These rules collectively define how many points should be awarded to a receipt.
 * If the trimmed length of the item description is a multiple of 3, multiply the price by `0.2` and round up to the nearest integer. The result is the number of points earned.
 * 6 points if the day in the purchase date is odd.
 * 10 points if the time of purchase is after 2:00pm and before 4:00pm.
-
-
+---
 ## Examples
 ### Example 1
 ```json
