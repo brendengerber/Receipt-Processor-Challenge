@@ -40,7 +40,7 @@ const validatePrice = function(price){
         if(typeof price !== 'string'){
             return undefined;
         };
-        if(!validator.isCurrency(price, {thousands_separator: '', require_decimal: true, digits_after_decimal: [2]}) || isNaN(price)){
+        if(!validator.isCurrency(price, {thousands_separator: '', require_decimal: true, digits_after_decimal: [0, 1, 2]}) || isNaN(price)){
             return false;
         };
         return true;

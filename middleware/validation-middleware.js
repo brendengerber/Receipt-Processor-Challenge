@@ -41,7 +41,7 @@ const receiptSchema = new Schema({
         type: String,
         required: true
     }
-});
+}, {strict: true});
 
 //Validates the receipt object sent in the request body and attatches it to req.receipt to pass it to the next middleware
 //Creates a formatted error message recording all invalidities, and sends a 400 response if there are any
