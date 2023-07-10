@@ -1,6 +1,6 @@
 //Imports necessary modules
 const express = require('express');
-const {validateReceipt, validateIdParam} = require('../middleware/validation-middleware.js');
+const {validateReceiptReq, validateIdParam} = require('../middleware/validation-middleware.js');
 const {assignReceiptId, assignReceiptPoints, addReceipt, attatchReceiptById} = require('../middleware/data-handling-middleware.js');
 
 //Creates the router
@@ -11,7 +11,7 @@ receiptsRouter.param('id', validateIdParam);
 
 //Assigns the new receipt a v4 UUID, assigns its point value, saves it, and sends a response with the newly assigned Id
 //For a successful POST, the body must be a properly formatted receipt in JSON
-receiptsRouter.post('/process', validateReceipt, assignReceiptId, assignReceiptPoints, addReceipt, (req, res, next) => {
+receiptsRouter.post('/process', validateReceiptReq, assignReceiptId, assignReceiptPoints, addReceipt, (req, res, next) => {
     res.status(201).send({"id": req.receipt.id});
 });
 
