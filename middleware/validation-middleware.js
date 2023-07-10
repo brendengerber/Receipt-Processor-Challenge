@@ -2,12 +2,12 @@
 //This allows for consistency and for middlewares down the chain to use the data knowing it is clean and properly formatted
 
 //Imports necessary modules
-const {validateId, validateReceipt} = require('../helper-functions/validation-helper-functions.js')
+const {validateId, validateReceipt} = require('../helper-functions/validation-helper-functions.js');
 
 //Validates the receipt object sent in the request body and attatches it to req.receipt to pass it to the next middleware
 const validateReceiptReq = (req, res, next) => {
     try{
-        req.receipt = validateReceipt(req.body)
+        req.receipt = validateReceipt(req.body);
         next();
     //Catches any errors and passes them to the error handling middleware
     }catch(err){
