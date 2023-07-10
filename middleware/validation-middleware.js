@@ -1,3 +1,5 @@
+//Route functionality is kept here in seperate middleware functions to maintain separation of concerns and allow for re use in multiple routes
+//Middleware functions are in charge of calling the correct helper functions with the correct arguments and attatching results to the req object
 //Validation middlewares will add request bodies and parameters as custom properties to the req object
 //This allows for consistency and for middlewares down the chain to use the data knowing it is clean and properly formatted
 

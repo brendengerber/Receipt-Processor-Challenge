@@ -1,6 +1,6 @@
 //This file contains helper functions that manipulate a dataset 
-//The helper functions are kept generic to allow for re-use by multiple modules for multiple purposes
-//If the data storrage method is changed, these functions can be refactored to return the same results without affecting the rest of the server and allowing it to continue functioning as normal
+//These functions are generic and can be used dynamically on any table by multiple modules for multiple purposes
+//If the data storage method is changed, these functions can be refactored to return the same results without affecting the rest of the server and allowing it to continue functioning as normal
 
 //Imports necessary modules
 const crypto = require('crypto');
