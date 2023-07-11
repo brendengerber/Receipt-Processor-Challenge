@@ -29,6 +29,7 @@ const validateIdParam = (req, res, next) => {
             err.status = 400;
             next(err);
         }
+    //Catches any errors and passes them to the error handling middleware
     }catch(err){
         next(err);
     }
