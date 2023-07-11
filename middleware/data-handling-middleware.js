@@ -32,7 +32,6 @@ const addReceipt = (req, res, next) => {
     }catch(err){
         next(err);
     }
-
 };
 
 //Locates and attatches the receipt of a given Id to the req object to be passed to the next middleware 
