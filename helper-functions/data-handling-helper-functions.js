@@ -1,5 +1,6 @@
-//This file contains helper functions that manipulate a dataset 
-//These functions are generic and can be used dynamically on any table by multiple modules for multiple purposes
+//This file contains helper functions that manipulate a dataset
+//They are kept separate not only to reuse, but also to separate functionality
+//They are generic and can be used dynamically on any table by multiple modules for multiple purposes
 //If the data storage method is changed, these functions can be refactored to return the same results without affecting the rest of the server and allowing it to continue functioning as normal
 
 //Imports necessary modules
